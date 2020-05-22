@@ -211,3 +211,153 @@ The following are some methods provided by this interface:
 
 # 6.com.restfulbooker.apitest.baseAPI
 `com.restfulbooker.apitest.baseAPI` represents application’s each API entities with web service’s request data properties like request headers & request body data. For each API endpoint, one java file should be there with different functions/methods for each HTTP action. (eg:- for /users API, one java file (users.java) would be created. If /users support GET, POST&PUT HTTP methods then 3 unique functions/methods should be there in users.java file to invoke different HTTP actions of /users API).  In order for the tests to work properly, names of the fields(request data(headers, body)) must match the application's API structure convention.
+
+# Simple Example Test
+Now, let's get started with the simple example – a basic booking sites login page:
+
+## API Details
+> `Post` https://www.mwtestconsultancy.co.uk/auth
+
+**Header**
+| Field  | Type | Description | 
+| --- | --- | --- |
+| Content-Type | String  | Sets the format of payload you are sending Default value: `application/json` |
+
+**Request body**
+| Field  | Type | Description | 
+| --- | --- | --- |
+| username	| String | Username for authentication, Default value: `admin` |
+| password	| String | Password for authentication, Default value: `password123` |
+		
+**Success 200**
+| Field  | Type | Description |
+| --- | --- | --- |
+| token	| String | Token to use in future requests |
+
+**Response** 
+```
+HTTP/1.1 200 OK
+
+{
+    "token": "abc123"
+}		
+```
+
+## 1) Create a base API
+Let's now use RestAssured framework to automatically verify/test this login API.
+
+> In `com.restfulbooker.apitest.baseAPI` package create a `Auth.java` file, which will contain all `auth` API's request parameters.
+```
+package com.restfulbooker.apitest.baseAPI;
+
+import com.restfulbooker.apitest.actions.HttpOperation;
+import com.restfulbooker.apitest.restassuredFuntions.API;
+
+public class Auth extends API{
+	
+  public Auth(){}
+      
+  /*Creates a new auth token to use for access to the PUT and DELETE /booking*/
+    
+	private void createToken(String userName, String passWord) {
+		initBase("Host");
+		init("/auth", HttpOperation.POST);
+		setHeader("Content-Type","application/json");
+		setBody("{ \"username\" : \""+userName+"\", \"password\" : \""+passWord+"\"}");
+	}
+	
+	/**/
+	public String getLoginToken(String userName, String passWord) {
+		createToken(userName, passWord);
+		String response = callIt();
+		return response;
+	}
+}	
+```
+So, what we did here is – we created a java `private` method `createToken` which defines `auth` API's properties like `url,http method, request header & body`. Through `getLoginToken` method we can call & access the login request. 
+
+
+> All application constants are configured in `src/main/resources/constants.properties` file.
+```
+Host=https://restful-booker.herokuapp.com
+HostName=127.0.0.1
+UserName=SSHUserName
+PrivateKey=src/main/resources/test_data/ssh_id_rsa
+DBUrl=jdbc:mysql://127.0.0.1:3306/
+DBName=automation_db
+DBUserName=dbUserName
+DBPassWord=dbpassword
+```
+
+## 2) Write an Actual Test
+> Create a `LoginTest.java` file under `com.restfulbooker.apitest.businessLogics` package. (`src/test/java/` package holds all test classes (TestNG) related to application.)
+```
+package com.restfulbooker.apitest.businessLogics;
+
+import org.testng.annotations.Test;
+import com.restfulbooker.apitest.actions.ValidatorOperation;
+import com.restfulbooker.apitest.baseAPI.Auth;
+import com.restfulbooker.apitest.listeners.ExtentTestManager;
+import com.relevantcodes.extentreports.LogStatus;
+import java.lang.reflect.Method;
+
+
+public class LoginTest {
+	
+  String response;
+  
+  @Test
+  public void validLoginTest(Method method) {
+	  
+	  ExtentTestManager.startTest(method.getName(), "Description: Valid Login Scenario with username and password.");
+	  Auth response = new Auth();
+	  response.getLoginToken("admin", "password123");
+	  
+	  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response code");
+	  response.assertIt(200);
+	  
+	  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response value not empty case");
+	  response.assertIt("token",null,ValidatorOperation.NOT_EMPTY);
+	  
+	  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response value not null case");
+	  response.assertIt("token",null,ValidatorOperation.NOT_NULL);
+	  
+	 }
+  
+  @Test
+  public void invalidLoginTest(Method method) {
+	  
+	  ExtentTestManager.startTest(method.getName(), "Description: InValid Login Scenario with username and password.");
+	  Auth response = new Auth();
+	  response.getLoginToken("dummy", "dummypassword123");
+	  
+	  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response code");
+	  response.assertIt(200);
+	  
+	  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response value == Bad credentials");
+	  response.assertIt("reason","Bad credentials",ValidatorOperation.EQUALS);
+	 
+	  
+	 }
+
+}
+```
+> In test method `validLoginTest`, what we did is – we are making call to the endpoint `/auth` with valid reqeust body data & application responds with a response data, that data stored in `response` String. In subsequent lines we are validating response code value `200` and response body values(here the condition is reponse token should return valid string, not a null/empty value).
+
+**Asserting Response code**
+```
+ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response code");
+response.assertIt(200);
+```
+**Asserting Response body**
+```
+ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response value not empty case");
+response.assertIt("token",null,ValidatorOperation.NOT_EMPTY);
+	  
+ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response value not null case");
+response.assertIt("token",null,ValidatorOperation.NOT_NULL);
+```
+
+> Similarly in `invalidLoginTest` method, we are asserting whether the response body data `reason` returns as `Bad credentials` or not.
+
+> Note that, `assertIt` is a custom method I created for response assertion. For more implementation details refer `com.restfulbooker.apitest.restassuredFunctions.API`.
