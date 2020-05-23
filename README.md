@@ -1,5 +1,5 @@
-# restassuredFramework
-This project has a RestAssured based API testing framework. Underlying, it uses RestAssured -API testing library, TestNG - Third-party free library for Running tests, and for Reporting, Extent Reports (library for interactive and detailed reports for tests). This framework can be used for any Restful application to create API tests
+# RestAssured API Testing Automation Framework
+This project has a RestAssured based API testing framework. Underlying, it uses RestAssured -API testing library, TestNG - Third-party free library for Running tests, and for Reporting, Extent Reports (library for interactive and detailed reports for tests). This framework can be used for any Restful application to create API tests.
 
 **API**
 > I have used [Restful-booker](https://restful-booker.herokuapp.com/apidoc/index.html ) API as a basis for the API test framework. We can use Restful-booker API to learn more about API Testing or try out API testing tools against. Restful-booker is a Create Read Update Delete Web API that comes with authentication features and loaded with a bunch of bugs for you to explore. The API comes pre-loaded with 10 records for you to work with and resets itself every 10 minutes back to that default state. Restful-booker also comes with detailed API documentation to help get you started with your API testing straight away.
@@ -361,3 +361,11 @@ response.assertIt("token",null,ValidatorOperation.NOT_NULL);
 > Similarly in `invalidLoginTest` method, we are asserting whether the response body data `reason` returns as `Bad credentials` or not.
 
 > Note that, `assertIt` is a custom method I created for response assertion. For more implementation details refer `com.restfulbooker.apitest.restassuredFunctions.API`.
+
+## 3) Extent HTML report
+**Test Summary**
+![alt text](https://github.com/sithik1994/rest_assured-automation-framework/blob/master/ExtentReports/reports%20sample%20img1.png?raw=true)
+
+**Specific Test details**
+![alt text](https://github.com/sithik1994/rest_assured-automation-framework/blob/master/ExtentReports/reports%20sample%20img2.png?raw=true)
+![alt text](https://github.com/sithik1994/rest_assured-automation-framework/blob/master/ExtentReports/reports%20sample%20img3.png?raw=true)
