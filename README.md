@@ -369,3 +369,7 @@ response.assertIt("token",null,ValidatorOperation.NOT_NULL);
 **Specific Test details**
 ![alt text](https://github.com/sithik1994/rest_assured-automation-framework/blob/master/ExtentReports/reports%20sample%20img2.png?raw=true)
 ![alt text](https://github.com/sithik1994/rest_assured-automation-framework/blob/master/ExtentReports/reports%20sample%20img3.png?raw=true)
+
+
+> So far, we have explored the use case of this custom RestAssured framework and looked at its most important features which we can use to test our RESTful services and validate their responses.
+If you want to make a change in this, start **forking**. If you find this project somehow useful to you, **star** it.
