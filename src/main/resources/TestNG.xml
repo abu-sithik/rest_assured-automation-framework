@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="RestFulBooker_API_Testing_Automation" >
+    <listeners>
+        <listener class-name="com.restfulbooker.apitest.listeners.TestStatusListener"/>
+        <listener class-name="com.restfulbooker.apitest.listeners.AnnotationTransformer"/>
+    </listeners>
+    <test name="LoginTest">
+        <classes>
+            <class name="com.restfulbooker.apitest.businessLogics.LoginTest"/>
+        </classes>
+    </test>
+</suite>
