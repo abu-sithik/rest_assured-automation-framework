@@ -1,8 +1,5 @@
 package com.restfulbooker.apitest.businessLogics;
 
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
-import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 import com.restfulbooker.apitest.actions.ValidatorOperation;

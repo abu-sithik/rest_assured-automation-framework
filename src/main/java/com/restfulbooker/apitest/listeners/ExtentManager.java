@@ -18,7 +18,7 @@ public class ExtentManager {
             }
             else if (System.getProperty("os.name").toLowerCase().contains("mac")) {
                 extent = new ExtentReports(workingDir + "/ExtentReports/ExtentReportResults.html", true);
-                extent.loadConfig(new File(workingDir + "/extent-cong.xml"));
+                extent.loadConfig(new File(workingDir + "/extent-config.xml"));
             }
         }
         return extent;

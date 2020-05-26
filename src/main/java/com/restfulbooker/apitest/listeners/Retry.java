@@ -12,7 +12,7 @@ public class Retry implements IRetryAnalyzer {
     private int count = 1;
     private static int maxTry = 1; //To Run the failed test n number of times.
  
-    @Override
+    
     public boolean retry(ITestResult iTestResult) {
         if (!iTestResult.isSuccess()) {                      //Check if test not succeed
             if (count < maxTry) {                            //Check if maxTry count is reached
