@@ -1,29 +1,44 @@
 # RestAssured API Testing Automation Framework
 This project has a RestAssured based API testing framework. Underlying, it uses RestAssured -API testing library, TestNG - Third-party free library for Running tests, and for Reporting, Extent Reports (library for interactive and detailed reports for tests). This framework can be used for any Restful application to create API tests.
 
-**API**
+# Contents
+* [Framework Details](#FrameworkDetails)
+	* [Base API](#api)
+	* [Framework - What and Why?](#ww)
+	* [Project structure](#structure)
+	* [Properties](#properties)
+* [Packages](#package)
+	* [Main Package](#main)
+	* [Test Package](#test)
+	* [Reports](#reports)
+* [Simple Example Test](#example)
+	* [1) Create a base API](#1)
+	* [2) Write an Actual Test](#2)
+	* [3) Extent HTML report](#3)
+
+# Framework Details<a name="FrameworkDetails"></a>
+#### Base API<a name="api"></a>
 > I have used [Restful-booker](https://restful-booker.herokuapp.com/apidoc/index.html ) API as a basis for the API test framework. We can use Restful-booker API to learn more about API Testing or try out API testing tools against. Restful-booker is a Create Read Update Delete Web API that comes with authentication features and loaded with a bunch of bugs for you to explore. The API comes pre-loaded with 10 records for you to work with and resets itself every 10 minutes back to that default state. Restful-booker also comes with detailed API documentation to help get you started with your API testing straight away.
 
-**Framework - What and Why?**
+#### Framework - What and Why?<a name="ww"></a>
 > For any software requirement, certain common and basic tasks need to be performed. Such tasks would have been already solved and would be available as open-source/free projects. One can use that and build their code on top of it to solve the software requirements specific to them. Such base code is called a framework
       
-**Project structure**
+#### Project structure<a name="structure"></a>
 > This project uses a standard Maven Java project with standard java folder structure and POM.xml
 
-**Properties**
+#### Properties<a name="properties"></a>
 > `src/main/resources/constants.properties` is a simple constants properties file to store various constants like application URL, DB & SSH details.
 
-# Packages
-**Main Package**
+# Packages<a name="package"></a>
+#### Main Package
 > `src/main/java/` is the core package of Framework and it has various sub-packages dedicatedly for various API testing functionalities. All sub-package details are mentioned in the following section.
 
-**Test Package**
+#### Test Package<a name="test"></a>
 > `src/test/java/` is the actual test package and the sub package `com.restfulbooker.apitest.businessLogics` holds all test classes (TestNG) related to restfulbooker application.
 
-**Reports**
+#### Reports<a name="reports"></a>
 > With the Extent library, we can create interactive and detailed reports for our API test results. We can add events, tags, devices, authors or any other relevant information we decide is essential to create an informative and stunning report. Test Reports can be found in `workingDir/ExtentReports/ExtentReportResults.html`
-
-**Main Package**
+#### Main Package<a name="main"></a>
 ```
 - com.restfulbooker.apitest.actions
 	 - HttpOperation.java
@@ -48,14 +63,14 @@ This project has a RestAssured based API testing framework. Underlying, it uses 
 ```
 
 # 1.com.restfulbooker.apitest.actions
-**HttpOperation.java**
+#### HttpOperation.java
  > Its a Java Enum type, which is implemented to have a set of different HttpOperation constants. Which can be used to create, read, update, and delete (or CRUD) operations, respectively.
 
-**ValidatorOperation.java**
+#### ValidatorOperation.java
 > Its a Java Enum type, which is implemented to have a set of different ValidatorOperation constants. Which can be used in response json assertions.
 
 # 2.com.restfulbooker.apitest.interfaces
-**IApi.java**
+#### IApi.java
 > It contains all the methods needed to write API tests and provides basic assertion APIs. It is the blueprint of the `API.java` class.
 
 `void init(String url, com.restfulbooker.apitest.actions.HttpOperation)`
@@ -145,17 +160,16 @@ This project has a RestAssured based API testing framework. Underlying, it uses 
 
 # 3.com.restfulbooker.apitest.listeners
 
-**ExtentManager Class:**
+#### ExtentManager Class:
 > In this class, we created an `ExtentReports` object and it can be reachable via `getReporter()` method. Also, we need to set ExtentReports report HTML file location.
 
-**ExtentTestManager Class:**
+#### ExtentTestManager Class:
 > An extentTestMap map is created. It holds the information of thread ids and ExtentTest instances.
 ExtentReports instance is created by calling getReporter() method from ExtentManager.
 At `startTest()` method, an instance of ExtentTest created and put into extentTestMap with current thread id.
 At `endTest()` method, test ends and ExtentTest instance got from extentTestMap via current thread id.
 At `getTest()` method, return ExtentTest instance in extentTestMap by using current thread id.
-
-**AnnotationTransformer**
+#### AnnotationTransformer
 ```
 `void transform(ITestAnnotation annotation,
                java.lang.Class testClass,
@@ -170,13 +184,13 @@ This method will be invoked by TestNG to give you a chance to modify a TestNG an
 `testMethod` - If the annotation was found on a method, this parameter represents this method (null otherwise).
 ```
  
-**Retry**
+#### Retry
 > Retry class implements `IRetryAnalyzer`. `IRetryAnalyzer` reruns the TestNG tests when they are failed. At the end of the execution, if we need to analyze failed test cases and try to figure out if there’s any false positive/flaky situation caused by network glitch, time-out or some other problem. In order to overcome this issue, we can use `IRetryAnalyzer` interface.
 
-**TestStatusListener**
+#### TestStatusListener
 > In order to listen to test events such as passed, failed, skipped, etc. we have TestListener class which implements ITestListener.
 
-**ITestListener**
+#### ITestListener
 ```
 By using ITestListener, we can change the default behaviour of your test by adding different events to the methods. It also defines a new way of logging or reporting.
 The following are some methods provided by this interface:
@@ -196,23 +210,23 @@ The following are some methods provided by this interface:
 ```
 
 # 4.com.restfulbooker.apitest.restassuredFunctions
-**API.java**
+#### API.java
 > The `API.java` class which implements the IApi interface defines complete functionality for the methods declared in the `IApi interface`.
 
 # 5.com.restfulbooker.apitest.utilities
-**DBConnection.java**
+#### DBConnection.java
 > A Singleton Java class for MySQL DB connection. It contains insert, update, truncate, and query methods, apart from that it has a singleton pattern to connect to MySQL database. All database constants(URL,dbname, username, etc) can be found in Constants.properties file.
 
-**Helper.java**
+#### Helper.java
 > Its a Java class for SSH remote server connection. It contains methods to create/close new SSH sessions and methods to execute SSH commands.
 
-**SshConnectionManager.java**
+#### SshConnectionManager.java
 > Its a custom Java helper class, which contains some reusable functions for reading CSV / TSV files, common JSON path assertions, etc.
 
 # 6.com.restfulbooker.apitest.baseAPI
 `com.restfulbooker.apitest.baseAPI` represents application’s each API entities with web service’s request data properties like request headers & request body data. For each API endpoint, one java file should be there with different functions/methods for each HTTP action. (eg:- for /users API, one java file (users.java) would be created. If /users support GET, POST&PUT HTTP methods then 3 unique functions/methods should be there in users.java file to invoke different HTTP actions of /users API).  In order for the tests to work properly, names of the fields(request data(headers, body)) must match the application's API structure convention.
 
-# Simple Example Test
+# Simple Example Test<a name="example"></a>
 Now, let's get started with the simple example – a basic booking sites login page:
 
 ## API Details
@@ -243,7 +257,7 @@ HTTP/1.1 200 OK
 }		
 ```
 
-## 1) Create a base API
+## 1) Create a base API<a name="1"></a>
 Let's now use RestAssured framework to automatically verify/test this login API.
 
 > In `com.restfulbooker.apitest.baseAPI` package create a `Auth.java` file, which will contain all `auth` API's request parameters.
@@ -289,7 +303,7 @@ DBUserName=dbUserName
 DBPassWord=dbpassword
 ```
 
-## 2) Write an Actual Test
+## 2) Write an Actual Test<a name="2"></a>
 > Create a `LoginTest.java` file under `com.restfulbooker.apitest.businessLogics` package. (`src/test/java/` package holds all test classes (TestNG) related to application.)
 ```
 package com.restfulbooker.apitest.businessLogics;
@@ -344,12 +358,12 @@ public class LoginTest {
 ```
 > In test method `validLoginTest`, what we did is – we are making call to the endpoint `/auth` with valid reqeust body data & application responds with a response data, that data stored in `response` String. In subsequent lines we are validating response code value `200` and response body values(here the condition is reponse token should return valid string, not a null/empty value).
 
-**Asserting Response code**
+#### Asserting Response code
 ```
 ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response code");
 response.assertIt(200);
 ```
-**Asserting Response body**
+#### Asserting Response body
 ```
 ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response value not empty case");
 response.assertIt("token",null,ValidatorOperation.NOT_EMPTY);
@@ -362,7 +376,8 @@ response.assertIt("token",null,ValidatorOperation.NOT_NULL);
 
 > Note that, `assertIt` is a custom method I created for response assertion. For more implementation details refer `com.restfulbooker.apitest.restassuredFunctions.API`.
 
-## 3) Extent HTML report
+## 3) Extent HTML report<a name="3"></a>
+> Test Reports can be found in `workingDir/ExtentReports/ExtentReportResults.html`
 **Test Summary**
 ![alt text](https://github.com/sithik1994/rest_assured-automation-framework/blob/master/ExtentReports/reports%20sample%20img1.png?raw=true)
 
