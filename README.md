@@ -33,10 +33,10 @@ This project has a RestAssured based API testing framework. Underlying, it uses 
 
 # Packages<a name="package"></a>
 #### Main Package
-> `src/main/java/` is the core package of Framework and it has various sub-packages dedicatedly for various API testing functionalities. All sub-package details are mentioned in the following section.
+> `src/main/java/` is the core package of Framework and it has various sub-packages dedicatedly for various API testing functionalities. All sub-package details are mentioned in the following section. Added necessary documentation to all classes. The Javadoc can be found in the paths `<working-dir>/doc/index.html`
 
 #### Test Package<a name="test"></a>
-> `src/test/java/` is the actual test package and the sub package `com.restfulbooker.apitest.businessLogics` holds all test classes (TestNG) related to restfulbooker application.
+> `src/test/java/` is the actual test package and the sub package `com.restfulbooker.apitest.businessLogics` holds all test classes (TestNG) related to restfulbooker application. The Javadoc can be found in the paths `<working-dir>/doc/com/restfulbooker/apitest/businessLogics/package-summary.html`
 
 #### Reports<a name="reports"></a>
 > With the Extent library, we can create interactive and detailed reports for our API test results. We can add events, tags, devices, authors or any other relevant information we decide is essential to create an informative and stunning report. Test Reports can be found in `workingDir/ExtentReports/ExtentReportResults.html`
