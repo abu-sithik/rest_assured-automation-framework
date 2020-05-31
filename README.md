@@ -152,7 +152,6 @@ The following are some methods provided by this interface:
   - In terminal enter java -version to check if java is installed in the system.
   - In terminal enter javac -version to check if java compiler is installed in the system.
   - Any version of java greater than 1.8 is supported.
-  - Check with API team in case a lower version is installed 
   - Install java development kit if not available.
 
 **Install Eclipse / Any other latest IDE [Skip this step if already installed]:** 
