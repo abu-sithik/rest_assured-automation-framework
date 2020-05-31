@@ -11,6 +11,8 @@ This project has a RestAssured based API testing framework. Underlying, it uses 
 	* [Main Package](#main)
 	* [Test Package](#test)
 	* [Reports](#reports)
+* [Installation](#install)
+	* [Steps to follow to setup API automation in local system](#steps)
 * [Simple Example Test](#example)
 	* [1) Create a base API](#1)
 	* [2) Write an Actual Test](#2)
@@ -38,7 +40,8 @@ This project has a RestAssured based API testing framework. Underlying, it uses 
 
 #### Reports<a name="reports"></a>
 > With the Extent library, we can create interactive and detailed reports for our API test results. We can add events, tags, devices, authors or any other relevant information we decide is essential to create an informative and stunning report. Test Reports can be found in `workingDir/ExtentReports/ExtentReportResults.html`
-#### Main Package<a name="main"></a>
+
+## Main Package<a name="main"></a>
 ```
 - com.restfulbooker.apitest.actions
 	 - HttpOperation.java
@@ -62,103 +65,18 @@ This project has a RestAssured based API testing framework. Underlying, it uses 
 	- Application API End points
 ```
 
-# 1.com.restfulbooker.apitest.actions
+### 1.com.restfulbooker.apitest.actions
 #### HttpOperation.java
  > Its a Java Enum type, which is implemented to have a set of different HttpOperation constants. Which can be used to create, read, update, and delete (or CRUD) operations, respectively.
 
 #### ValidatorOperation.java
 > Its a Java Enum type, which is implemented to have a set of different ValidatorOperation constants. Which can be used in response json assertions.
 
-# 2.com.restfulbooker.apitest.interfaces
+### 2.com.restfulbooker.apitest.interfaces
 #### IApi.java
 > It contains all the methods needed to write API tests and provides basic assertion APIs. It is the blueprint of the `API.java` class.
 
-`void init(String url, com.restfulbooker.apitest.actions.HttpOperation)`
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| init | String url, `com.restfulbooker.apitest.actions.HttpOperation` | void | NA | Used to specify the url of the API (excluding base url). HttpOperation is an enum with following values that specifies the HTTP method the API uses - GET, POST, PUT, PATCH.|
-
-`void setHeader(String header, String value)`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| setHeader | String header, String value | void | NA | Used to set header for an API. Overloaded for (String[][]) - can be used to specify multiple headers as an array of  arrays |
-
-`void setBody(String body)`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| setBody | String body | void | NA | Used to set the body data for an API. |
-
-`String callIt()`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| callIt | NA | void | `String` | This method makes the API call and returns the response as String. |
-
-`void setQueryParam(String key, String val)`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| setQueryParam | String key, String val | void | NA | Used to set query parameters for API call |
-
-`void assertIt(int code)`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| assertIt | int code | void | NA | Used to assert the status code for the request |
-
-`void assertIt(String key, Object value, ValidatorOperation operation)`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| assertIt | String key, Object value, ValidatorOperation operation | void | NA | Used to assert key and value based on the ValidatorOperation operation which is an enum with values like `KEY_PRESENTS, EQUALS, HAS_ALL` |
-
-`void assertIt(List<List<Object>> data)`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| assertIt | List<List<Object>> data | void | NA | Used to assert multiple key and value pairs based on Validator Operation operation. |
-
-`String getResponseString()`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| getResponseString | NA | String | ResponseString is returned as a String | Returns response String as String |
-
-`void void printResp()`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| printResp | NA | void | NA | Prints the response obtained from the API. |
-
-`Object extractIt(String path)`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| extractIt | String path | Object | Returns data to be extracted. | Extracts and returns the Object at the mentioned path from the response string. |
-
-`String extractString(String path)`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| extractString | String path | String | Returns the data to be extracted as a String. | Extracts and returns the data at the mentioned path from the response string as a String. |
-
-`int extractInt(String path)`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| extractInt | String path | int | Returns the data to be extracted as an int. | Extracts and returns the data at the mentioned path from the response string as an int |
-
-`List<> extractString(String path)`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| extractList| String path | List<> | Returns the data to be extracted as a List<> | Extracts and returns the data at the mentioned path from the response string as a List<> |
-
-`void failTest(String Expected, String Present)`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| failTest | String Expected, String Present | void | NA | Displays an Assertion Error message |
-
-`fileUpload()`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| fileUpload() | NA | NA | NA | NA |
-
-`String extractHeader(String header_name)`  
-| Name  | Input Parameters | Return Type | Output |  Description | 
-| --- | --- | --- | --- | --- |
-| extractHeader | String header_name | String | Returns value of header as a String | Extracts value of the header present in header_name. |
-
-# 3.com.restfulbooker.apitest.listeners
+### 3.com.restfulbooker.apitest.listeners
 
 #### ExtentManager Class:
 > In this class, we created an `ExtentReports` object and it can be reachable via `getReporter()` method. Also, we need to set ExtentReports report HTML file location.
@@ -209,11 +127,11 @@ The following are some methods provided by this interface:
 **onTestFailedButWithinSuccessPercentage:** This method is invoked each time the test method fails but is within the success percentage mentioned. To implement this method, we use two attributes as a parameter of test annotation in TestNG, i.e. successPercentage and invocationCount. The successPercentage takes the value of percentage of successful tests and invocationCount denotes the number of times that a particular test method executes. For example:  @Test(successPercentage=60, invocationCount=5). In this annotation, the success percentage is 60% and the invocation count is 5, which means that out of 5 times, if the test method gets passed at least 3 times ((⅗)*100= 60), it will be considered as passed.
 ```
 
-# 4.com.restfulbooker.apitest.restassuredFunctions
+### 4.com.restfulbooker.apitest.restassuredFunctions
 #### API.java
 > The `API.java` class which implements the IApi interface defines complete functionality for the methods declared in the `IApi interface`.
 
-# 5.com.restfulbooker.apitest.utilities
+### 5.com.restfulbooker.apitest.utilities
 #### DBConnection.java
 > A Singleton Java class for MySQL DB connection. It contains insert, update, truncate, and query methods, apart from that it has a singleton pattern to connect to MySQL database. All database constants(URL,dbname, username, etc) can be found in Constants.properties file.
 
@@ -223,8 +141,50 @@ The following are some methods provided by this interface:
 #### SshConnectionManager.java
 > Its a custom Java helper class, which contains some reusable functions for reading CSV / TSV files, common JSON path assertions, etc.
 
-# 6.com.restfulbooker.apitest.baseAPI
+### 6.com.restfulbooker.apitest.baseAPI
 `com.restfulbooker.apitest.baseAPI` represents application’s each API entities with web service’s request data properties like request headers & request body data. For each API endpoint, one java file should be there with different functions/methods for each HTTP action. (eg:- for /users API, one java file (users.java) would be created. If /users support GET, POST&PUT HTTP methods then 3 unique functions/methods should be there in users.java file to invoke different HTTP actions of /users API).  In order for the tests to work properly, names of the fields(request data(headers, body)) must match the application's API structure convention.
+
+# Installation<a name="install"></a>
+#### Steps to follow to setup API automation in local system:<a name="steps"></a>
+
+**Install Java: [Skip this step if already installed]**
+- Check if Java is installed.
+  - In terminal enter java -version to check if java is installed in the system.
+  - In terminal enter javac -version to check if java compiler is installed in the system.
+  - Any version of java greater than 1.8 is supported.
+  - Check with API team in case a lower version is installed 
+  - Install java development kit if not available.
+
+**Install Eclipse / Any other latest IDE [Skip this step if already installed]:** 
+- Install eclipse photon if not available.
+  - Download eclipse installer.
+  - Run eclipse installer.
+  - Select install eclipse for java developers.
+  - Open workbench.
+
+**Get Code base:**
+  - Clone restassuredFramework
+    - url : https://github.com/sithik1994/restassuredFramework.git
+
+**Setup project in Eclipse:** 
+  - File -> Open Project from File System -> Browse the folder and open the cloned project.
+  - Open -> Help -> Eclipse Marketplace -> Search testng -> Install Testng for eclipse plugin -> Restart eclipse.
+  - Maven will be available by default, with eclipse. To check, right click on project -> should have an option called maven.
+```
+Possible issues:
+In case of error in pom.xml file ->Cannot read lifecycle mapping metadata for artifact org.apache.maven.plugins:mav
+  - In terminal open Users/<profile_name>/.m2
+  - Run rm -r repository
+  - Right click on project -> Update project
+In case of error in all import statements
+  - Click on src/main/java folder -> build path -> remove from build path
+  - Click on src -> main -> java ->right click -> build path -> use as source folder
+  - Refresh the project
+````
+**Set up verification**
+  - In business logic package -> Right click on any java file -> run as testng test.
+
+
 
 # Simple Example Test<a name="example"></a>
 Now, let's get started with the simple example – a basic booking sites login page:
@@ -269,23 +229,33 @@ import com.restfulbooker.apitest.restassuredFuntions.API;
 
 public class Auth extends API{
 	
-  public Auth(){}
+    public Auth(){}
       
-  /*Creates a new auth token to use for access to the PUT and DELETE /booking*/
-    
-	private void createToken(String userName, String passWord) {
+    /**
+     * Creates a new auth token to use for access to the PUT and DELETE /booking
+     * 
+     * */
+    private void createToken(String userName, String passWord) {
 		initBase("Host");
 		init("/auth", HttpOperation.POST);
 		setHeader("Content-Type","application/json");
 		setBody("{ \"username\" : \""+userName+"\", \"password\" : \""+passWord+"\"}");
 	}
 	
-	/**/
+
+	/**
+	 * @param	userName (Username string value for the restful bokker application) 			
+	 * 			passWord (password string value for the restful bokker application)
+	 * 
+	 * @return 	returns login token
+	 * */
 	public String getLoginToken(String userName, String passWord) {
 		createToken(userName, passWord);
 		String response = callIt();
+		//System.out.println(response);
 		return response;
-	}
+	}	
+	
 }	
 ```
 So, what we did here is – we created a java `private` method `createToken` which defines `auth` API's properties like `url,http method, request header & body`. Through `getLoginToken` method we can call & access the login request. 
@@ -319,7 +289,12 @@ import java.lang.reflect.Method;
 public class LoginTest {
 	
   String response;
-  
+
+  /**
+   * reference API Doc: https://restful-booker.herokuapp.com/apidoc/index.html
+   * 
+   * */
+
   @Test
   public void validLoginTest(Method method) {
 	  
@@ -327,14 +302,21 @@ public class LoginTest {
 	  Auth response = new Auth();
 	  response.getLoginToken("admin", "password123");
 	  
-	  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response code");
-	  response.assertIt(200);
+	  try {
+		  //ExtentTestManager.getTest().log(LogStatus.INFO, "URL is: " +response.url)
+		  response.assertIt(200);
+		  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response code");
+		    
+		  response.assertIt("token",null,ValidatorOperation.NOT_EMPTY);
+		  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response value not empty case");
+		  
+		  response.assertIt("token",null,ValidatorOperation.NOT_NULL);
+		  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response value not null case");
+	  }
+	  catch(AssertionError e){
+		  ExtentTestManager.getTest().log(LogStatus.FAIL,"Assertion Failure: " +e.getMessage());
+	  }
 	  
-	  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response value not empty case");
-	  response.assertIt("token",null,ValidatorOperation.NOT_EMPTY);
-	  
-	  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response value not null case");
-	  response.assertIt("token",null,ValidatorOperation.NOT_NULL);
 	  
 	 }
   
@@ -345,12 +327,18 @@ public class LoginTest {
 	  Auth response = new Auth();
 	  response.getLoginToken("dummy", "dummypassword123");
 	  
-	  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response code");
-	  response.assertIt(200);
-	  
-	  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response value == Bad credentials");
-	  response.assertIt("reason","Bad credentials",ValidatorOperation.EQUALS);
-	 
+	  try {
+		//ExtentTestManager.getTest().log(LogStatus.INFO, "URL is: " +response.url);		 
+		  response.assertIt(200);
+		  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response code");
+		  
+		  response.assertIt("reason","Bad credentials",ValidatorOperation.EQUALS);
+		  ExtentTestManager.getTest().log(LogStatus.INFO, "Asserting response value == Bad credentials");
+
+	  }
+	  catch(AssertionError e){
+		  ExtentTestManager.getTest().log(LogStatus.FAIL,"Assertion Failure: " +e.getMessage());
+	  }	 
 	  
 	 }
 

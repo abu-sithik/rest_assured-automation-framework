@@ -24,10 +24,10 @@
 		
 		<style>
 				
-            
-                
-            
+      
         
+      
+    
 		</style>
 	</head>
 	
@@ -47,13 +47,13 @@
 					<a href='#!' onclick="_updateCurrentStage(-1)" class='dashboard-view'><i class='mdi-action-track-changes'></i></i>Analysis</a>
 				</li>
 			</ul>
-			<span class='report-name'>Automation Report</span> <span class='report-headline'></span>
+			<span class='report-name'>API Automation Report</span> <span class='report-headline'>API Automation Report</span>
 			<ul class='right hide-on-med-and-down nav-right'>
 				<li class='theme-selector' alt='Click to toggle dark theme. To enable by default, use js configuration $("body").addClass("dark");' title='Click to toggle dark theme. To enable by default, use js configuration $("body").addClass("dark");'>
 					<i class='mdi-hardware-desktop-windows'></i>
 				</li>
 				<li>
-					<span class='suite-started-time'>2020-05-25 20:40:52</span>
+					<span class='suite-started-time'>2020-05-31 18:36:09</span>
 				</li>
 				<li>
 					<span>v2.41.1</span>
@@ -83,25 +83,25 @@
 					<div class='col l2 m4 s12'>
 						<div class='card suite-total-time-current'> 
 							<span class='panel-name'>Total Time Taken (Current Run)</span> 
-							<span class='suite-total-time-current-value panel-lead'>0h 0m 7s+923ms</span> 
+							<span class='suite-total-time-current-value panel-lead'>0h 0m 7s+52ms</span> 
 						</div> 
 					</div>
 					<div class='col l2 m4 s12'>
 						<div class='card suite-total-time-overall'> 
 							<span class='panel-name'>Total Time Taken (Overall)</span> 
-							<span class='suite-total-time-overall-value panel-lead'>0h 0m 7s+923ms</span> 
+							<span class='suite-total-time-overall-value panel-lead'>0h 0m 7s+52ms</span> 
 						</div> 
 					</div>
 					<div class='col l2 m4 s6 suite-start-time'>
 						<div class='card accent green-accent'> 
 							<span class='panel-name'>Start</span> 
-							<span class='panel-lead suite-started-time'>2020-05-25 20:40:44</span> 
+							<span class='panel-lead suite-started-time'>2020-05-31 18:36:02</span> 
 						</div> 
 					</div>
 					<div class='col l2 m4 s6 suite-end-time'>
 						<div class='card accent pink-accent'> 
 							<span class='panel-name'>End</span> 
-							<span class='panel-lead suite-ended-time'>2020-05-25 20:40:52</span> 
+							<span class='panel-lead suite-ended-time'>2020-05-31 18:36:09</span> 
 						</div> 
 					</div>
 				</div>
@@ -237,15 +237,15 @@
 						<div class='card-panel no-padding-h no-padding-v no-margin-v'>
 							<div class='wrapper'>
 								<ul id='test-collection' class='test-collection'>
-										<li class='collection-item test displayed active pass ' extentid='7bf98f67-1d43-4c7c-abc6-c3c00d59c0e6'>
+										<li class='collection-item test displayed active fail ' extentid='aeb3208b-b3e5-4224-8db7-6c2044529524'>
 											<div class='test-head'>
 												<span class='test-name'>invalidLoginTest </span>
-												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='test-status label right outline capitalize fail'>fail</span>
 												<span class='category-assigned hide '></span>
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-05-25 20:40:44</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-05-31 18:36:02</span>
 													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
 													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
 												</div>
@@ -263,18 +263,14 @@
 														</thead>
 														<tbody>
 																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>20:40:49</td>
-																	<td class='step-details'>Asserting response code</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>20:40:49</td>
-																	<td class='step-details'>Asserting response value == Bad credentials</td>
+																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
+																	<td class='timestamp'>18:36:07</td>
+																	<td class='step-details'>Assertion Failure: 1 expectation failed.
+Expected status code <200> but was <503>.</td>
 																</tr>
 																<tr>
 																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
-																	<td class='timestamp'>20:40:49</td>
+																	<td class='timestamp'>18:36:07</td>
 																	<td class='step-details'>Test passed</td>
 																</tr>
 														</tbody>
@@ -284,17 +280,17 @@
 												</div>
 											</div>
 										</li>
-										<li class='collection-item test displayed active pass ' extentid='41663d69-89ed-413c-9459-cbfa70b22e5e'>
+										<li class='collection-item test displayed active fail ' extentid='3b8ad5f7-48d7-4088-9128-062466bd7f9f'>
 											<div class='test-head'>
 												<span class='test-name'>validLoginTest </span>
-												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='test-status label right outline capitalize fail'>fail</span>
 												<span class='category-assigned hide '></span>
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-05-25 20:40:49</span>
-													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-05-25 20:40:51</span>
-													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 2s+190ms</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2020-05-31 18:36:07</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2020-05-31 18:36:09</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 1s+659ms</span>
 												</div>
 												<div class='test-desc'>Description: Valid Login Scenario with username and password.</div>
 												<div class='test-attributes'>
@@ -310,23 +306,14 @@
 														</thead>
 														<tbody>
 																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>20:40:51</td>
-																	<td class='step-details'>Asserting response code</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>20:40:51</td>
-																	<td class='step-details'>Asserting response value not empty case</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>20:40:51</td>
-																	<td class='step-details'>Asserting response value not null case</td>
+																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
+																	<td class='timestamp'>18:36:09</td>
+																	<td class='step-details'>Assertion Failure: 1 expectation failed.
+Expected status code <200> but was <503>.</td>
 																</tr>
 																<tr>
 																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
-																	<td class='timestamp'>20:40:51</td>
+																	<td class='timestamp'>18:36:09</td>
 																	<td class='step-details'>Test passed</td>
 																</tr>
 														</tbody>
@@ -433,12 +420,12 @@
 		<script>$(document).ready(function() { $('.logo span').html('ExtentReports'); });</script>
 		<script>
 				
-            
-                $(document).ready(function() {
-                    
-                });
-            
-        
+      
+        $(document).ready(function() {
+          
+        });
+      
+    
 		</script>
 	</body>
 </html>
