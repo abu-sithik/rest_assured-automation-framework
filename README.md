@@ -164,7 +164,7 @@ The following are some methods provided by this interface:
 
 **Get Code base:**
   - Clone restassuredFramework
-    - url : https://github.com/sithik1994/restassuredFramework.git
+    - url : https://github.com/abu-sithik/restassuredFramework.git
 
 **Setup project in Eclipse:** 
   - File -> Open Project from File System -> Browse the folder and open the cloned project.
